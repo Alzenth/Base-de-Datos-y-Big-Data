@@ -11,8 +11,8 @@
   DTS:LocaleID="10250"
   DTS:ObjectName="ETL_JVGYM"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{D2251C71-CE14-437D-B327-1B945198ED18}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{AA196BFC-5069-45C5-AA3F-8E508A7C9782}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -362,7 +362,276 @@ FROM            Cliente</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <pipeline
-          version="1" />
+          version="1">
+          <components>
+            <component
+              refId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="Destino Dim_Membresia"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Dim_Membresia"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ADO_JVGYM_DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[ADO_JVGYM_DWH]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Inputs[Entrada de destino de ADO NET].Columns[ID_Membresia]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ID_Membresia"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Inputs[Entrada de destino de ADO NET].ExternalColumns[ID_Membresia]"
+                      lineageId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].Columns[ID_Membresia]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Inputs[Entrada de destino de ADO NET].Columns[Tipo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Tipo"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Inputs[Entrada de destino de ADO NET].ExternalColumns[Tipo]"
+                      lineageId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].Columns[Tipo]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Inputs[Entrada de destino de ADO NET].Columns[DuracionMeses]"
+                      cachedDataType="i4"
+                      cachedName="DuracionMeses"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Inputs[Entrada de destino de ADO NET].ExternalColumns[Duracion]"
+                      lineageId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].Columns[DuracionMeses]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Inputs[Entrada de destino de ADO NET].ExternalColumns[ID_Membresia]"
+                      dataType="wstr"
+                      length="10"
+                      name="ID_Membresia" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Inputs[Entrada de destino de ADO NET].ExternalColumns[Tipo]"
+                      dataType="wstr"
+                      length="50"
+                      name="Tipo" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Inputs[Entrada de destino de ADO NET].ExternalColumns[Duracion]"
+                      dataType="i4"
+                      name="Duracion" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Inputs[Entrada de destino de ADO NET].ExternalColumns[Precio]"
+                      dataType="numeric"
+                      name="Precio"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server."
+              name="Origen Dim_Membresia"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        ID_Membresia, Tipo, DuracionMeses
+FROM            Membresia</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de origen."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Dim_Membresia"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ADO_JVGYM_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[ADO_JVGYM_OLTP]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].Columns[ID_Membresia]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].ExternalColumns[ID_Membresia]"
+                      length="10"
+                      lineageId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].Columns[ID_Membresia]"
+                      name="ID_Membresia"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].Columns[Tipo]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].ExternalColumns[Tipo]"
+                      length="50"
+                      lineageId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].Columns[Tipo]"
+                      name="Tipo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].Columns[DuracionMeses]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].ExternalColumns[DuracionMeses]"
+                      lineageId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].Columns[DuracionMeses]"
+                      name="DuracionMeses"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].ExternalColumns[ID_Membresia]"
+                      dataType="wstr"
+                      length="10"
+                      name="ID_Membresia" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].ExternalColumns[Tipo]"
+                      dataType="wstr"
+                      length="50"
+                      name="Tipo" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET].ExternalColumns[DuracionMeses]"
+                      dataType="i4"
+                      name="DuracionMeses" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de error de origen de ADO NET].Columns[ID_Membresia]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de error de origen de ADO NET].Columns[ID_Membresia]"
+                      name="ID_Membresia" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de error de origen de ADO NET].Columns[Tipo]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de error de origen de ADO NET].Columns[Tipo]"
+                      name="Tipo" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de error de origen de ADO NET].Columns[DuracionMeses]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de error de origen de ADO NET].Columns[DuracionMeses]"
+                      name="DuracionMeses" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CFT - Cargar Dim_Menbresia.Paths[Salida de origen de ADO NET]"
+              endId="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de ADO NET"
+              startId="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -561,13 +830,13 @@ FROM            Cliente</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="175,42"
-          Id="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente"
-          TopLeft="145,81" />
-        <NodeLayout
           Size="179,42"
           Id="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente"
           TopLeft="226,194" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente"
+          TopLeft="145,81" />
         <EdgeLayout
           Id="Package\CFT - Cargar Dim_Cliente.Paths[Salida de origen de ADO NET]"
           TopLeft="232.5,123">
@@ -606,7 +875,7 @@ FROM            Cliente</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente">
+    design-time-name="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -614,7 +883,73 @@ FROM            Cliente</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente">
+    design-time-name="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\CFT - Cargar Dim_Menbresia">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="195,42"
+          Id="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia"
+          TopLeft="238,131" />
+        <NodeLayout
+          Size="199,42"
+          Id="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia"
+          TopLeft="410,269" />
+        <EdgeLayout
+          Id="Package\CFT - Cargar Dim_Menbresia.Paths[Salida de origen de ADO NET]"
+          TopLeft="335.5,173">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="174,96"
+              Start="0,0"
+              End="174,88.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44"
+                    Point2="0,48"
+                    Point3="4,48" />
+                  <mssgle:LineSegment
+                    End="170,48" />
+                  <mssgle:CubicBezierSegment
+                    Point1="170,48"
+                    Point2="174,48"
+                    Point3="174,52" />
+                  <mssgle:LineSegment
+                    End="174,88.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
