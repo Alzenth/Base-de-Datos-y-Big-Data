@@ -11,8 +11,8 @@
   DTS:LocaleID="10250"
   DTS:ObjectName="ETL_JVGYM"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{B021BC69-5576-4C84-81A0-DF0D2A16B193}">
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{5324596D-6F0B-4615-9E69-C671B76F4EBA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1405,45 +1405,45 @@ FROM            Inscripcion INNER JOIN
         <NodeLayout
           Size="206,42"
           Id="Package\CFT - Cargar Dim_Cliente"
-          TopLeft="228.999990438422,192.599999529918" />
+          TopLeft="197.999990438422,202.599999529918" />
         <NodeLayout
           Size="224,42"
           Id="Package\CFT - Cargar Dim_Menbresia"
-          TopLeft="511,180" />
+          TopLeft="489,151" />
         <NodeLayout
           Size="198,42"
           Id="Package\CFT - Cargar Dim_Sede"
-          TopLeft="810,201" />
+          TopLeft="829,174" />
         <NodeLayout
           Size="227,42"
           Id="Package\CFT - Cargar Fact_Inscripcion"
-          TopLeft="486.5,300.5" />
+          TopLeft="498.5,339.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción]"
-          TopLeft="331.999990438422,234.599999529918">
+          TopLeft="300.999990438422,244.599999529918">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="213.250009561578,65.900000470082"
+              EndConnector="256.250009561578,94.900000470082"
               Start="0,0"
-              End="213.250009561578,58.400000470082">
+              End="256.250009561578,87.400000470082">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,39.4232223707072" />
+                    End="0,58.5320757814474" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,39.4232223707072"
-                    Point2="0,43.4232223707072"
-                    Point3="4,43.4232223707072" />
+                    Point1="0,58.5320757814474"
+                    Point2="0,62.5320757814474"
+                    Point3="4,62.5320757814474" />
                   <mssgle:LineSegment
-                    End="209.250009561578,43.4232223707072" />
+                    End="252.250009561578,62.5320757814474" />
                   <mssgle:CubicBezierSegment
-                    Point1="209.250009561578,43.4232223707072"
-                    Point2="213.250009561578,43.4232223707072"
-                    Point3="213.250009561578,47.4232223707072" />
+                    Point1="252.250009561578,62.5320757814474"
+                    Point2="256.250009561578,62.5320757814474"
+                    Point3="256.250009561578,66.5320757814474" />
                   <mssgle:LineSegment
-                    End="213.250009561578,58.400000470082" />
+                    End="256.250009561578,87.400000470082" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1454,30 +1454,30 @@ FROM            Inscripcion INNER JOIN
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 1]"
-          TopLeft="623,222">
+          TopLeft="601,193">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-23,78.5"
+              EndConnector="11,146.5"
               Start="0,0"
-              End="-23,71">
+              End="11,139">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,35.25" />
+                    End="0,69.25" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,35.25"
-                    Point2="0,39.25"
-                    Point3="-4,39.25" />
+                    Point1="0,69.25"
+                    Point2="0,73.25"
+                    Point3="4,73.25" />
                   <mssgle:LineSegment
-                    End="-19,39.25" />
+                    End="7,73.25" />
                   <mssgle:CubicBezierSegment
-                    Point1="-19,39.25"
-                    Point2="-23,39.25"
-                    Point3="-23,43.25" />
+                    Point1="7,73.25"
+                    Point2="11,73.25"
+                    Point3="11,77.25" />
                   <mssgle:LineSegment
-                    End="-23,71" />
+                    End="11,139" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1488,30 +1488,30 @@ FROM            Inscripcion INNER JOIN
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 2]"
-          TopLeft="909,243">
+          TopLeft="928,216">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-254.25,57.5"
+              EndConnector="-261.25,123.5"
               Start="0,0"
-              End="-254.25,50">
+              End="-261.25,116">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.8882438316401" />
+                    End="0,77.377358490566" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,33.8882438316401"
-                    Point2="0,37.8882438316401"
-                    Point3="-4,37.8882438316401" />
+                    Point1="0,77.377358490566"
+                    Point2="0,81.377358490566"
+                    Point3="-4,81.377358490566" />
                   <mssgle:LineSegment
-                    End="-250.25,37.8882438316401" />
+                    End="-257.25,81.377358490566" />
                   <mssgle:CubicBezierSegment
-                    Point1="-250.25,37.8882438316401"
-                    Point2="-254.25,37.8882438316401"
-                    Point3="-254.25,41.8882438316401" />
+                    Point1="-257.25,81.377358490566"
+                    Point2="-261.25,81.377358490566"
+                    Point3="-261.25,85.377358490566" />
                   <mssgle:LineSegment
-                    End="-254.25,50" />
+                    End="-261.25,116" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1772,7 +1772,7 @@ FROM            Inscripcion INNER JOIN
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion">
+    design-time-name="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1780,7 +1780,7 @@ FROM            Inscripcion INNER JOIN
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion">
+    design-time-name="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
