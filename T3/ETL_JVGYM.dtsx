@@ -11,8 +11,8 @@
   DTS:LocaleID="10250"
   DTS:ObjectName="ETL_JVGYM"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{AA196BFC-5069-45C5-AA3F-8E508A7C9782}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{EA13C3B8-F511-425F-8ED4-C8FCEC293007}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -23,7 +23,7 @@
       DTS:ObjectName="ADO_JVGYM_DWH">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=JVGYMDW;Integrated Security=True;Trust Server Certificate=True;" />
+          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JVGYMDW;Integrated Security=True;Trust Server Certificate=True;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -33,7 +33,7 @@
       DTS:ObjectName="ADO_JVGYM_OLTP">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=JVGYM;Integrated Security=True;Trust Server Certificate=True;" />
+          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JVGYM;Integrated Security=True;Trust Server Certificate=True;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -646,7 +646,308 @@ FROM            Membresia</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <pipeline
-          version="1" />
+          version="1">
+          <components>
+            <component
+              refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="Destino Dim_Sede"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Dim_Sede"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ADO_JVGYM_DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[ADO_JVGYM_DWH]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET].Columns[ID_Sede]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ID_Sede"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET].ExternalColumns[ID_Sede]"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].Columns[ID_Sede]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET].Columns[Nombre]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Nombre"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET].ExternalColumns[Nombre]"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].Columns[Nombre]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET].Columns[Ubicacion]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Ubicacion"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET].ExternalColumns[Ubicacion]"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].Columns[Ubicacion]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET].Columns[Departamento]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Departamento"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET].ExternalColumns[Departamento]"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].Columns[Departamento]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET].ExternalColumns[ID_Sede]"
+                      dataType="wstr"
+                      length="10"
+                      name="ID_Sede" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET].ExternalColumns[Nombre]"
+                      dataType="wstr"
+                      length="50"
+                      name="Nombre" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET].ExternalColumns[Ubicacion]"
+                      dataType="wstr"
+                      length="50"
+                      name="Ubicacion" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET].ExternalColumns[Departamento]"
+                      dataType="wstr"
+                      length="50"
+                      name="Departamento" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server."
+              name="Origen Dim_Sede"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        ID_Sede, Nombre, Ubicacion, Departamento
+FROM            Sede</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de origen."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ADO_JVGYM_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[ADO_JVGYM_OLTP]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].Columns[ID_Sede]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].ExternalColumns[ID_Sede]"
+                      length="10"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].Columns[ID_Sede]"
+                      name="ID_Sede"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].Columns[Nombre]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].ExternalColumns[Nombre]"
+                      length="50"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].Columns[Nombre]"
+                      name="Nombre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].Columns[Ubicacion]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].ExternalColumns[Ubicacion]"
+                      length="50"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].Columns[Ubicacion]"
+                      name="Ubicacion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].Columns[Departamento]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].ExternalColumns[Departamento]"
+                      length="50"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].Columns[Departamento]"
+                      name="Departamento"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].ExternalColumns[ID_Sede]"
+                      dataType="wstr"
+                      length="10"
+                      name="ID_Sede" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].ExternalColumns[Nombre]"
+                      dataType="wstr"
+                      length="50"
+                      name="Nombre" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].ExternalColumns[Ubicacion]"
+                      dataType="wstr"
+                      length="50"
+                      name="Ubicacion" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET].ExternalColumns[Departamento]"
+                      dataType="wstr"
+                      length="50"
+                      name="Departamento" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de error de origen de ADO NET].Columns[ID_Sede]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de error de origen de ADO NET].Columns[ID_Sede]"
+                      name="ID_Sede" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de error de origen de ADO NET].Columns[Nombre]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de error de origen de ADO NET].Columns[Nombre]"
+                      name="Nombre" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de error de origen de ADO NET].Columns[Ubicacion]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de error de origen de ADO NET].Columns[Ubicacion]"
+                      name="Ubicacion" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de error de origen de ADO NET].Columns[Departamento]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de error de origen de ADO NET].Columns[Departamento]"
+                      name="Departamento" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CFT - Cargar Dim_Sede.Paths[Salida de origen de ADO NET]"
+              endId="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de ADO NET"
+              startId="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -941,7 +1242,7 @@ FROM            Membresia</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia">
+    design-time-name="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -949,7 +1250,73 @@ FROM            Membresia</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\CFT - Cargar Dim_Menbresia\Destino Dim_Membresia">
+    design-time-name="Package\CFT - Cargar Dim_Menbresia\Origen Dim_Membresia">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\CFT - Cargar Dim_Sede">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="166,42"
+          Id="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede"
+          TopLeft="280,210" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede"
+          TopLeft="382,348" />
+        <EdgeLayout
+          Id="Package\CFT - Cargar Dim_Sede.Paths[Salida de origen de ADO NET]"
+          TopLeft="363,252">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="104.5,96"
+              Start="0,0"
+              End="104.5,88.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44"
+                    Point2="0,48"
+                    Point3="4,48" />
+                  <mssgle:LineSegment
+                    End="100.5,48" />
+                  <mssgle:CubicBezierSegment
+                    Point1="100.5,48"
+                    Point2="104.5,48"
+                    Point3="104.5,52" />
+                  <mssgle:LineSegment
+                    End="104.5,88.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
