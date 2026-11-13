@@ -7,12 +7,12 @@
   DTS:CreatorName="FABRIZIO\Fabrizio"
   DTS:DTSID="{01437239-93BC-4782-A5FF-9C64F12DC5B6}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
   DTS:LocaleID="10250"
   DTS:ObjectName="ETL_JVGYM"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{EA13C3B8-F511-425F-8ED4-C8FCEC293007}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{B021BC69-5576-4C84-81A0-DF0D2A16B193}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -23,7 +23,7 @@
       DTS:ObjectName="ADO_JVGYM_DWH">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JVGYMDW;Integrated Security=True;Trust Server Certificate=True;" />
+          DTS:ConnectionString="Data Source=ULCA60527;Initial Catalog=JVGYMDW;Integrated Security=True;Trust Server Certificate=True;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -33,7 +33,7 @@
       DTS:ObjectName="ADO_JVGYM_OLTP">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JVGYM;Integrated Security=True;Trust Server Certificate=True;" />
+          DTS:ConnectionString="Data Source=ULCA60527;Initial Catalog=JVGYM;Integrated Security=True;Trust Server Certificate=True;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -962,7 +962,405 @@ FROM            Sede</property>
       <DTS:Variables />
       <DTS:ObjectData>
         <pipeline
-          version="1" />
+          version="1">
+          <components>
+            <component
+              refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="Destino Fact_Inscripcion"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Fact_Inscripcion"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ADO_JVGYM_DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[ADO_JVGYM_DWH]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].Columns[ID_Inscripcion]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ID_Inscripcion"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[ID_Inscripcion]"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[ID_Inscripcion]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].Columns[ID_Sede]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ID_Sede"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[ID_Sede]"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[ID_Sede]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].Columns[ID_Membresia]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ID_Membresia"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[ID_Membresia]"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[ID_Membresia]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].Columns[Fecha_Inscripcion]"
+                      cachedDataType="dbDate"
+                      cachedName="Fecha_Inscripcion"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[Fecha_Inscripcion]"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[Fecha_Inscripcion]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].Columns[Fecha_Fin]"
+                      cachedDataType="dbDate"
+                      cachedName="Fecha_Fin"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[Fecha_Fin]"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[Fecha_Fin]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].Columns[Monto_Pagado]"
+                      cachedDataType="numeric"
+                      cachedName="Monto_Pagado"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[Monto_Pagado]"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[Monto_Pagado]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].Columns[DNI]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="DNI"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[ClienteDNI]"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[DNI]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[ID_Inscripcion]"
+                      dataType="wstr"
+                      length="10"
+                      name="ID_Inscripcion" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[ClienteDNI]"
+                      dataType="wstr"
+                      length="8"
+                      name="ClienteDNI" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[ID_Sede]"
+                      dataType="wstr"
+                      length="10"
+                      name="ID_Sede" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[ID_Membresia]"
+                      dataType="wstr"
+                      length="10"
+                      name="ID_Membresia" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[Fecha_Inscripcion]"
+                      dataType="dbTimeStamp"
+                      name="Fecha_Inscripcion" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[Fecha_Fin]"
+                      dataType="dbTimeStamp"
+                      name="Fecha_Fin" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET].ExternalColumns[Monto_Pagado]"
+                      dataType="numeric"
+                      name="Monto_Pagado"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server."
+              name="Origen Fact_Inscripcion"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT       Inscripcion.ID_Inscripcion, Cliente.DNI, Sede.ID_Sede, Membresia.ID_Membresia, Inscripcion.Fecha_Inscripcion, Inscripcion.Fecha_Fin, Inscripcion.Monto_Pagado
+FROM            Inscripcion INNER JOIN
+                         Cliente ON Inscripcion.DNI = Cliente.DNI INNER JOIN
+                         Sede ON Inscripcion.ID_Sede = Sede.ID_Sede INNER JOIN
+                         Membresia ON Inscripcion.ID_Membresia = Membresia.ID_Membresia</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de origen."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ADO_JVGYM_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[ADO_JVGYM_OLTP]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[ID_Inscripcion]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[ID_Inscripcion]"
+                      length="10"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[ID_Inscripcion]"
+                      name="ID_Inscripcion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[DNI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[DNI]"
+                      length="8"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[DNI]"
+                      name="DNI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[ID_Sede]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[ID_Sede]"
+                      length="10"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[ID_Sede]"
+                      name="ID_Sede"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[ID_Membresia]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[ID_Membresia]"
+                      length="10"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[ID_Membresia]"
+                      name="ID_Membresia"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[Fecha_Inscripcion]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[Fecha_Inscripcion]"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[Fecha_Inscripcion]"
+                      name="Fecha_Inscripcion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[Fecha_Fin]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[Fecha_Fin]"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[Fecha_Fin]"
+                      name="Fecha_Fin"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[Monto_Pagado]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[Monto_Pagado]"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].Columns[Monto_Pagado]"
+                      name="Monto_Pagado"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[ID_Inscripcion]"
+                      dataType="wstr"
+                      length="10"
+                      name="ID_Inscripcion" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[DNI]"
+                      dataType="wstr"
+                      length="8"
+                      name="DNI" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[ID_Sede]"
+                      dataType="wstr"
+                      length="10"
+                      name="ID_Sede" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[ID_Membresia]"
+                      dataType="wstr"
+                      length="10"
+                      name="ID_Membresia" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[Fecha_Inscripcion]"
+                      dataType="dbDate"
+                      name="Fecha_Inscripcion" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[Fecha_Fin]"
+                      dataType="dbDate"
+                      name="Fecha_Fin" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET].ExternalColumns[Monto_Pagado]"
+                      dataType="numeric"
+                      name="Monto_Pagado"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[ID_Inscripcion]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[ID_Inscripcion]"
+                      name="ID_Inscripcion" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[DNI]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[DNI]"
+                      name="DNI" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[ID_Sede]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[ID_Sede]"
+                      name="ID_Sede" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[ID_Membresia]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[ID_Membresia]"
+                      name="ID_Membresia" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[Fecha_Inscripcion]"
+                      dataType="dbDate"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[Fecha_Inscripcion]"
+                      name="Fecha_Inscripcion" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[Fecha_Fin]"
+                      dataType="dbDate"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[Fecha_Fin]"
+                      name="Fecha_Fin" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[Monto_Pagado]"
+                      dataType="numeric"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[Monto_Pagado]"
+                      name="Monto_Pagado"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CFT - Cargar Fact_Inscripcion.Paths[Salida de origen de ADO NET]"
+              endId="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de ADO NET"
+              startId="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -1007,22 +1405,22 @@ FROM            Sede</property>
         <NodeLayout
           Size="206,42"
           Id="Package\CFT - Cargar Dim_Cliente"
-          TopLeft="78.999990438422,67.599999529918" />
+          TopLeft="228.999990438422,192.599999529918" />
         <NodeLayout
           Size="224,42"
           Id="Package\CFT - Cargar Dim_Menbresia"
-          TopLeft="361,55" />
+          TopLeft="511,180" />
         <NodeLayout
           Size="198,42"
           Id="Package\CFT - Cargar Dim_Sede"
-          TopLeft="660,76" />
+          TopLeft="810,201" />
         <NodeLayout
           Size="227,42"
           Id="Package\CFT - Cargar Fact_Inscripcion"
-          TopLeft="336.5,175.5" />
+          TopLeft="486.5,300.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción]"
-          TopLeft="181.999990438422,109.599999529918">
+          TopLeft="331.999990438422,234.599999529918">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1056,7 +1454,7 @@ FROM            Sede</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 1]"
-          TopLeft="473,97">
+          TopLeft="623,222">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1090,7 +1488,7 @@ FROM            Sede</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 2]"
-          TopLeft="759,118">
+          TopLeft="909,243">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1308,7 +1706,7 @@ FROM            Sede</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede">
+    design-time-name="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1316,7 +1714,73 @@ FROM            Sede</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\CFT - Cargar Dim_Sede\Destino Dim_Sede">
+    design-time-name="Package\CFT - Cargar Dim_Sede\Origen Dim_Sede">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\CFT - Cargar Fact_Inscripcion">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="195,42"
+          Id="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion"
+          TopLeft="356,166" />
+        <NodeLayout
+          Size="199,42"
+          Id="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion"
+          TopLeft="463,303" />
+        <EdgeLayout
+          Id="Package\CFT - Cargar Fact_Inscripcion.Paths[Salida de origen de ADO NET]"
+          TopLeft="453.5,208">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="109,95"
+              Start="0,0"
+              End="109,87.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.5"
+                    Point2="0,47.5"
+                    Point3="4,47.5" />
+                  <mssgle:LineSegment
+                    End="105,47.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="105,47.5"
+                    Point2="109,47.5"
+                    Point3="109,51.5" />
+                  <mssgle:LineSegment
+                    End="109,87.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CFT - Cargar Fact_Inscripcion\Origen Fact_Inscripcion">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CFT - Cargar Fact_Inscripcion\Destino Fact_Inscripcion">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
