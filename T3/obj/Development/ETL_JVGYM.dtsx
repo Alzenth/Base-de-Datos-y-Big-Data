@@ -1,0 +1,625 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/13/2026 12:10:24 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="FABRIZIO"
+  DTS:CreatorName="FABRIZIO\Fabrizio"
+  DTS:DTSID="{01437239-93BC-4782-A5FF-9C64F12DC5B6}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="10250"
+  DTS:ObjectName="ETL_JVGYM"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{D2251C71-CE14-437D-B327-1B945198ED18}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ADO_JVGYM_DWH]"
+      DTS:CreationName="ADO.NET:Microsoft.Data.SqlClient.SqlConnection, Microsoft.Data.SqlClient, Version=5.0.0.0, Culture=neutral, PublicKeyToken=23ec7fc2d6eaa4a5"
+      DTS:DTSID="{29059297-995C-4761-B8E4-ABDB806708BA}"
+      DTS:ObjectName="ADO_JVGYM_DWH">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=JVGYMDW;Integrated Security=True;Trust Server Certificate=True;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ADO_JVGYM_OLTP]"
+      DTS:CreationName="ADO.NET:Microsoft.Data.SqlClient.SqlConnection, Microsoft.Data.SqlClient, Version=5.0.0.0, Culture=neutral, PublicKeyToken=23ec7fc2d6eaa4a5"
+      DTS:DTSID="{94C35857-3299-42FA-9A27-6DB770C33260}"
+      DTS:ObjectName="ADO_JVGYM_OLTP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=JVGYM;Integrated Security=True;Trust Server Certificate=True;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\CFT - Cargar Dim_Cliente"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{07537002-7D9C-4578-AC27-1BE256535E45}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CFT - Cargar Dim_Cliente"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="Destino Dim_Cliente"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Dim_Cliente"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ADO_JVGYM_DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[ADO_JVGYM_DWH]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET].Columns[Nombres]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Nombres"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET].ExternalColumns[Nombres]"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].Columns[Nombres]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET].Columns[Edad]"
+                      cachedDataType="i4"
+                      cachedName="Edad"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET].ExternalColumns[Edad]"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].Columns[Edad]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET].Columns[Género]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Género"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET].ExternalColumns[Género]"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].Columns[Género]" />
+                    <inputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET].Columns[DNI]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="DNI"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET].ExternalColumns[ClienteDNI]"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].Columns[DNI]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET].ExternalColumns[ClienteDNI]"
+                      dataType="wstr"
+                      length="8"
+                      name="ClienteDNI" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET].ExternalColumns[Nombres]"
+                      dataType="wstr"
+                      length="50"
+                      name="Nombres" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET].ExternalColumns[Edad]"
+                      dataType="i4"
+                      name="Edad" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET].ExternalColumns[Género]"
+                      dataType="wstr"
+                      length="20"
+                      name="Género" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server."
+              name="Origen Dim_Cliente"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        DNI, Nombres, Edad, Género
+FROM            Cliente</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de origen."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ADO_JVGYM_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[ADO_JVGYM_OLTP]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].Columns[DNI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].ExternalColumns[DNI]"
+                      length="8"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].Columns[DNI]"
+                      name="DNI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].Columns[Nombres]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].ExternalColumns[Nombres]"
+                      length="50"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].Columns[Nombres]"
+                      name="Nombres"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].Columns[Edad]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].ExternalColumns[Edad]"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].Columns[Edad]"
+                      name="Edad"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].Columns[Género]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].ExternalColumns[Género]"
+                      length="20"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].Columns[Género]"
+                      name="Género"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].ExternalColumns[DNI]"
+                      dataType="wstr"
+                      length="8"
+                      name="DNI" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].ExternalColumns[Nombres]"
+                      dataType="wstr"
+                      length="50"
+                      name="Nombres" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].ExternalColumns[Edad]"
+                      dataType="i4"
+                      name="Edad" />
+                    <externalMetadataColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET].ExternalColumns[Género]"
+                      dataType="wstr"
+                      length="20"
+                      name="Género" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de error de origen de ADO NET].Columns[DNI]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de error de origen de ADO NET].Columns[DNI]"
+                      name="DNI" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de error de origen de ADO NET].Columns[Nombres]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de error de origen de ADO NET].Columns[Nombres]"
+                      name="Nombres" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de error de origen de ADO NET].Columns[Edad]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de error de origen de ADO NET].Columns[Edad]"
+                      name="Edad" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de error de origen de ADO NET].Columns[Género]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de error de origen de ADO NET].Columns[Género]"
+                      name="Género" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CFT - Cargar Dim_Cliente.Paths[Salida de origen de ADO NET]"
+              endId="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de ADO NET"
+              startId="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\CFT - Cargar Dim_Menbresia"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{341D0CC0-D9B3-498C-9B97-9C4506169EAF}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CFT - Cargar Dim_Menbresia"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\CFT - Cargar Dim_Sede"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{50269A53-8773-46D8-A7C8-6EA83F07F826}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CFT - Cargar Dim_Sede"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\CFT - Cargar Fact_Inscripcion"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{3AFE24E3-19EF-4C07-9C78-D10662C1966A}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CFT - Cargar Fact_Inscripcion"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:CreationName=""
+      DTS:DTSID="{CDD98EDF-CBD9-4EE4-974E-B60B2E22056B}"
+      DTS:From="Package\CFT - Cargar Dim_Cliente"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:To="Package\CFT - Cargar Fact_Inscripcion" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{67733882-256D-43CC-B7D2-8553F59E67D2}"
+      DTS:From="Package\CFT - Cargar Dim_Menbresia"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 1"
+      DTS:To="Package\CFT - Cargar Fact_Inscripcion" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{75DFFAC1-4311-4BF1-A1C1-BB66908C6ACF}"
+      DTS:From="Package\CFT - Cargar Dim_Sede"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 2"
+      DTS:To="Package\CFT - Cargar Fact_Inscripcion" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="206,42"
+          Id="Package\CFT - Cargar Dim_Cliente"
+          TopLeft="78.999990438422,67.599999529918" />
+        <NodeLayout
+          Size="224,42"
+          Id="Package\CFT - Cargar Dim_Menbresia"
+          TopLeft="361,55" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\CFT - Cargar Dim_Sede"
+          TopLeft="660,76" />
+        <NodeLayout
+          Size="227,42"
+          Id="Package\CFT - Cargar Fact_Inscripcion"
+          TopLeft="336.5,175.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="181.999990438422,109.599999529918">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="213.250009561578,65.900000470082"
+              Start="0,0"
+              End="213.250009561578,58.400000470082">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.4232223707072" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,39.4232223707072"
+                    Point2="0,43.4232223707072"
+                    Point3="4,43.4232223707072" />
+                  <mssgle:LineSegment
+                    End="209.250009561578,43.4232223707072" />
+                  <mssgle:CubicBezierSegment
+                    Point1="209.250009561578,43.4232223707072"
+                    Point2="213.250009561578,43.4232223707072"
+                    Point3="213.250009561578,47.4232223707072" />
+                  <mssgle:LineSegment
+                    End="213.250009561578,58.400000470082" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 1]"
+          TopLeft="473,97">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-23,78.5"
+              Start="0,0"
+              End="-23,71">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.25"
+                    Point2="0,39.25"
+                    Point3="-4,39.25" />
+                  <mssgle:LineSegment
+                    End="-19,39.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-19,39.25"
+                    Point2="-23,39.25"
+                    Point3="-23,43.25" />
+                  <mssgle:LineSegment
+                    End="-23,71" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 2]"
+          TopLeft="759,118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-254.25,57.5"
+              Start="0,0"
+              End="-254.25,50">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.8882438316401" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.8882438316401"
+                    Point2="0,37.8882438316401"
+                    Point3="-4,37.8882438316401" />
+                  <mssgle:LineSegment
+                    End="-250.25,37.8882438316401" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-250.25,37.8882438316401"
+                    Point2="-254.25,37.8882438316401"
+                    Point3="-254.25,41.8882438316401" />
+                  <mssgle:LineSegment
+                    End="-254.25,50" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\CFT - Cargar Dim_Cliente">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="175,42"
+          Id="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente"
+          TopLeft="145,81" />
+        <NodeLayout
+          Size="179,42"
+          Id="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente"
+          TopLeft="226,194" />
+        <EdgeLayout
+          Id="Package\CFT - Cargar Dim_Cliente.Paths[Salida de origen de ADO NET]"
+          TopLeft="232.5,123">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="83,71"
+              Start="0,0"
+              End="83,63.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.5"
+                    Point2="0,35.5"
+                    Point3="4,35.5" />
+                  <mssgle:LineSegment
+                    End="79,35.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="79,35.5"
+                    Point2="83,35.5"
+                    Point3="83,39.5" />
+                  <mssgle:LineSegment
+                    End="83,63.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CFT - Cargar Dim_Cliente\Origen Dim_Cliente">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CFT - Cargar Dim_Cliente\Destino Dim_Cliente">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
